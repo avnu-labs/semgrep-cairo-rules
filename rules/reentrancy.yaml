@@ -1,0 +1,20 @@
+rules:
+- id: reentrancy
+  message: |
+    Value mutated after call to external contract
+  severity: ERROR
+  mode: join
+  join:
+    rules:
+      - id: external-contract-declaration
+        languages: [cairo]
+        pattern: |
+          trait $SOME_CONTRACT {}
+      - id: external-call
+        languages: [cairo]
+        pattern: |
+          $SOME_CONTRACT::transfer(...);
+          ...;
+          $X = ...;
+    on:
+    - 'external-contract-declaration.$SOME_CONTRACT == external-call.$SOME_CONTRACT'

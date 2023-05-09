@@ -1,1 +1,1 @@
-# semgrep-cairo-rules
+# Semgrep - Cairo Rules

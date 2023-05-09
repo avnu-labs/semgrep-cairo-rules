@@ -1,0 +1,12 @@
+rules:
+- id: unsafe math operator
+  message: Call unsafe math operators on $X
+  languages: [cairo]
+  severity: ERROR
+  pattern-either:
+  - pattern: $X + $Y
+  - pattern: $X += ...
+  - pattern: $X - $Y
+  - pattern: $X -= ...
+  - pattern: $X * $Y
+  - pattern: $X *= ...
