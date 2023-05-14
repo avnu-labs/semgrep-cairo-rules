@@ -1,7 +1,13 @@
 name: release
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v*'
+      
+permissions:
+  contents: write
+  actions: read
+      
 jobs:
   package-rules:
     runs-on: ubuntu-latest
@@ -27,9 +33,9 @@ jobs:
           body_path: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        - name: upload linux artifact
       
-      - uses: actions/upload-release-asset@v1
+      - name: upload linux artifact
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:

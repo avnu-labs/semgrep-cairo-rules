@@ -8,3 +8,4 @@ for rule in os.listdir("rules"):
 
 with open("cairo-rules.yaml", "w+") as file:
     file.writelines(rules)
+    file.write("\n")
