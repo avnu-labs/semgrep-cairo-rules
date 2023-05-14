@@ -10,6 +10,7 @@ mod some_contract {
     fn transfer_token(from: ContractAddress, to: ContractAddress, amount: u256) -> bool {
         // Do some operations
         
+        // ruleid: reentrancy
         ERC20::transfer();
         balances::write(from, balances::read(from) - amount);
 

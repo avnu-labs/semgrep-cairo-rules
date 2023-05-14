@@ -1,5 +1,5 @@
 rules:
-- id: unsafe math operator
+- id: unsafe-arithmetic
   message: Call unsafe math operators on $X
   languages: [cairo]
   severity: ERROR

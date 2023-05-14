@@ -15,6 +15,6 @@ rules:
         pattern: |
           $SOME_CONTRACT::transfer(...);
           ...;
-          $X = ...;
+          $X::write(...);
     on:
-    - 'external-contract-declaration.$SOME_CONTRACT == external-call.$SOME_CONTRACT'
+      - 'external-contract-declaration.$SOME_CONTRACT == external-call.$SOME_CONTRACT'

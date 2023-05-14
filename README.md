@@ -1,28 +1,27 @@
 # Semgrep - Cairo Rules
 
-Repository to store Semgrep rules that will then be published on the Semgrep Registry
+Set of Cairo 1.0 rules to be used with Semgrep.
 
-**! Important !**
+## How to Use
 
-This repository is still a work in progress and we are in the proces of improving the release flow
-| Features | Done |
-|----------|------|
-| Changelog ||
-| Testing ||
-| Nightly ||
-| License ||
-| PR Decoration ||
+We assume that you have Semgrep already installed, otherwise you can refer to the following [doc](https://github.com/returntocorp/semgrep).
 
-## How to use
-
-1. Clone the repository in local
-2. Use with semgrep CLI by calling it as follows
+1. Get the last version of the rules that you can find on the [release page](https://github.com/avnu-labs/semgrep-cairo-rules/releases)
+2. From the terminal, call Semgrep with the rule you've downloaded in 1.
 ```
-semgrep -c path/to/rules .
+semgrep scan --config path/to/rules.yaml path/to/cairo_code
 ```
 
-## How to collaborate
+## Contribution
 
-1. Add your rules in `rules`
-2. Add example contracts in `example`
-3. Once you're satisfied with your work, create a PR and wait for your work to be merged !
+We strongly encourage anyone who wants to participate in improving the security of Starknet smart contracts to contribute to this repository either by creating new rules or improving existing ones.
+
+Here are the guidelines to contribute
+1. Create/Modify rules in `rules/`
+2. Add in `tests` one or several test case of your rule. We rely on the Semgrep testing facilities for our testing suite so please read the following [doc](https://semgrep.dev/docs/writing-rules/testing-rules) to understand how it works.
+3. To test the rules you need to have Semgrep installed. Run the following command
+```
+semgrep scan --config rules --test tests
+```
+4. If all tests are `ok`, create a new file in `changelog.d` and document it according to `changelog.d/README.md`
+5. Open a PR where you shortly describe the purpose of your change

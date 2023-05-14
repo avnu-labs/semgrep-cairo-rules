@@ -1,0 +1,24 @@
+[tool.towncrier]
+directory = "changelog.d"
+filename = "CHANGELOG.md"
+start_string = "<!-- towncrier release notes start -->\n"
+underlines = ["", "", ""]
+template = "changelog.d/template.jinja"
+title_format = "## [{version}](https://github.com/avnu-labs/semgrep-cairo-rules/tree/{version}) - {project_date}"
+issue_format = "[#{issue}](https://github.com/avnu-labs/semgrep-cairo-rules/issues/{issue})"
+
+
+[[tool.towncrier.type]]
+directory = "added"
+name = "Added"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "changed"
+name = "Changed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "fixed"
+name = "Fixed"
+showcontent = true
