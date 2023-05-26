@@ -1,6 +1,10 @@
 # Semgrep - Cairo Rules
 
-Set of Cairo 1.0 rules to be used with Semgrep.
+/!\ **Warning:** this repository contains highly experimental rules and doesn't guarantee security of your Cairo contract in anyway. We encourage anyone to participate and share their rules. /!\
+
+At present, the majority of the rules located here serve primarily as samples to demonstrate the process of constructing rules for Cairo 1.0.
+
+This initiative is an inspiration of the awesome job that [Trail Of Bit did for Cairo 0 with Amarna](https://blog.trailofbits.com/2022/04/20/amarna-static-analysis-for-cairo-programs/)
 
 ## How to Use
 
