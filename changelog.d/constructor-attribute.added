@@ -1,0 +1,1 @@
+add rule to prevent constructors being tagged as external (thanks to Antoine for his contribution)
