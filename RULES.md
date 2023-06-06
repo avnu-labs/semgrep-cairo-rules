@@ -15,5 +15,5 @@ List rules ideas and the status of their implementation.
 | Break CEI patterns | Warning | Check for violation of the CEI pattern | :construction: |
 | Missing break in loop | Warning | Check for missing termination condition in loop | :construction: |
 | Array OOB | Warning | Check for array indexing with tainted parameter | :construction: |
-| External constructor | Warning | Check if the constructor has been marked as external | :construction: |
+| External constructor | Warning | Check if the constructor has been marked as external | :white_check_mark: |
 
