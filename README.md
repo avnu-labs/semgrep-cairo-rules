@@ -1,6 +1,7 @@
 # Semgrep - Cairo Rules
 
-/!\ **Warning:** this repository contains highly experimental rules and doesn't guarantee security of your Cairo contract in anyway. We encourage anyone to participate and share their rules. /!\
+> **Warning** 
+> This repository contains highly experimental rules and doesn't guarantee security of your Cairo contract in anyway. We encourage anyone to participate and share their rules. You can find rule ideas [here](RULES.md)
 
 At present, the majority of the rules located here serve primarily as samples to demonstrate the process of constructing rules for Cairo 1.0.
 
