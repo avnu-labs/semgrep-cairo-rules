@@ -1,0 +1,42 @@
+rules:
+  - id: reentrancy
+    message: |
+      unused argument '$ARG' found in function '$F'
+    severity: WARNING
+    mode: join
+    join:
+      rules:
+        - id: contract-interface-declaration
+          languages: [cairo]
+          patterns:
+            - pattern: |
+                trait $CONTRACT_INTERFACE { 
+                  ...
+                }
+        - id: check-effect-interfaction
+          languages: [cairo]
+          patterns:
+            - pattern-inside: |
+                #[contract]
+                mod $CONTRACT {
+                  ...
+                }
+            - pattern: |
+                struct Storage {
+                  ...,
+                  $FIELD: $TYPE,
+                  ...
+                }
+            - pattern: |
+                fn $G(...) {
+                  ...
+                  ... . $F(...);
+                  ...
+                  $FIELD::write(...);
+                  ...
+                }
+      on:
+        - 'contract-interface-declaration.$CONTRACT_INTERFACE == check-effect-interfaction.$CONTRACT_INTERFACE'
+        - 'contract-interface-declaration.$F == check-effect-interfaction.$F'
+
+          

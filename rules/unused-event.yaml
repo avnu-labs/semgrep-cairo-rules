@@ -1,0 +1,23 @@
+rules:
+  - id: unused-event
+    message: |
+      unused event '$EVENT' found
+    severity: WARNING
+    languages: [cairo]
+    patterns:
+      - pattern: |
+          #[event]
+          fn $EVENT(...) {}
+
+      - pattern-not-inside: |
+          #[contract]
+          mod $CONTRACT {
+            ...
+            fn $F(...) {
+              ...
+              $EVENT(...);
+              ...
+            }
+            ...
+          }
+

@@ -1,0 +1,23 @@
+rules:
+  - id: unreachable-method
+    message: |
+      method '$F' is not reachable
+    severity: WARNING
+    languages: [cairo]
+    patterns:
+      - pattern: fn $F(...) { ... }
+      - pattern-not: |
+          #[external]
+          fn $F(...) { ... }
+      - pattern-not-inside: |
+          #[contract]
+          mod $CONTRACT {
+            ...
+            fn $G(...) {
+              ...
+              <... $F(...) ...>
+              ...
+            }
+            ...
+          }
+

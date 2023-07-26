@@ -1,0 +1,11 @@
+rules:
+  - id: unused-variables
+    message: |
+      unused variable '$VAR'
+    severity: WARNING
+    languages: [cairo]
+    patterns:
+      - pattern-inside: |
+          let $VAR = $Y;
+          ...
+      - pattern: $VAR

@@ -1,0 +1,10 @@
+rules:
+  - id: unused-return
+    severity: WARNING
+    message: yolo
+    languages: [cairo]
+    pattern: |
+      fn $F(...) -> ... {
+        ...
+      }
+    

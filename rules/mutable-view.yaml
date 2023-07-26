@@ -1,0 +1,42 @@
+rules:
+  - id: mutable-view
+    message: |
+      call to potentially mutable function in '$CONTRACT:$F' found
+    severity: WARNING
+    languages: [cairo]
+    pattern-either:
+      - patterns:
+          - pattern: |
+              #[view]
+              fn $F(...) {
+                ...
+                <... $FIELD::write(...) ...>
+                ...
+              }
+          - pattern-inside: |
+              mod $CONTRACT {
+                ...
+                struct Storage {
+                  ...,
+                  $FIELD: $TYPE,
+                  ...
+                }
+                ...
+              }
+      - patterns:
+        - pattern: |
+            #[view]
+            fn $F(...) {
+              ...
+              <... $G(...) ...>
+              ...
+            }
+        - pattern-inside: |
+            mod $CONTRACT {
+              ...
+              fn $G(...) { ... }
+              ...
+            }
+        - pattern-not: |
+            #[view]
+            fn $G(...) { ... }

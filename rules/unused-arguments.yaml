@@ -1,0 +1,13 @@
+rules:
+  - id: unused-arguments
+    message: |
+      unused argument '$ARG' found in function '$F'
+    severity: WARNING
+    languages: [cairo]
+    patterns:
+      - pattern: "fn $F(..., $ARG: $TYPE, ...) { ... }"
+      - pattern-not: "fn $F(..., $ARG: $TYPE, ...) { 
+        ...
+        <... $ARG ...>
+        ...
+      }"
