@@ -3,8 +3,29 @@ rules:
     severity: WARNING
     message: yolo
     languages: [cairo]
-    pattern: |
-      fn $F(...) -> ... {
-        ...
-      }
+    mode: join
+    join:
+      rules:
+        - id: function-with-return
+          languages: [cairo]
+          pattern: |
+            fn $F(...) -> ... { ... }
+        - id: unused-return
+          languages: [cairo]
+          patterns:
+            - pattern: $F(...);
+            - pattern-not-inside: let $X = $F(...);
+            - pattern-not-inside: if <... $F ...> { ... };
+            - pattern-not-inside: $CALL(..., <... $F ...>, ...)
+            - pattern-not-inside: |
+                fn $G(...) -> ... {
+                  ...
+                  $F(...)
+                }
+
+      on:
+        - 'function-with-return.$F == unused-return.$F'
+
+  
+        
     

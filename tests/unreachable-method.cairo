@@ -1,20 +1,26 @@
-#[contract]
-mod DeadCode {
+#[starknet::interface]
+trait ISomeContract<TContractState> {}
+
+#[starknet::contract]
+mod SomeContract {
+    struct Storage {}
     
     #[external]
-    fn use_event(amount: felt252) -> felt252{
-        add_1(amount)
+    fn valid_1(amount: felt252) -> felt252 {
+        valid_2(amount)
     }
 
-    fn add_1(amount: felt252) -> felt252 {
+    fn valid_2(amount: felt252) -> felt252 {
         amount + 1
     }
 
-    fn add_2(amount: felt252) -> felt252 {
+    // ruleid: unreachable-method
+    fn invalid_1(amount: felt252) -> felt252 {
         amount + 2
     }
 
-    fn add_3(amount: felt252) -> felt252 {
-        add_1(amount)
+    // ruleid: unreachable-method
+    fn invalid_2(amount: felt252) -> felt252 {
+        valid_2(amount)
     }
 }

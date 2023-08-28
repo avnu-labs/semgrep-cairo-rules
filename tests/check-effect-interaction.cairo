@@ -1,4 +1,4 @@
-#[abi]
+#[starknet::interface]
 trait IAnotherContract {
     fn foo(a: felt252);
 }
@@ -21,6 +21,7 @@ mod TestContract {
         IAnotherContractDispatcher { contract_address: address }.foo(a);
     }
 
+    // ruleid: broken-check-effect-interaction
     #[external]
     fn bad1(address: ContractAddress) {
         let a = a::read();
@@ -28,6 +29,7 @@ mod TestContract {
         a::write(4);
     }
     
+    // ruleid: broken-check-effect-interaction
     #[external]
     fn bad2(address: ContractAddress) {
         if 2 == 2 {
@@ -41,6 +43,7 @@ mod TestContract {
         b::write(4);
     }
 
+    // ruleid: broken-check-effect-interaction
     #[external]
     fn bad3(address: ContractAddress) {
         let a = a::read();
@@ -52,6 +55,7 @@ mod TestContract {
         IAnotherContractDispatcher { contract_address: address }.foo(4);
     }
 
+    // ruleid: broken-check-effect-interaction
     #[external]
     fn bad4(address: ContractAddress) {
         internal_ext_call2(address);

@@ -1,5 +1,5 @@
 rules:
-  - id: reentrancy
+  - id: broken-check-effect-interaction
     message: |
       unused argument '$ARG' found in function '$F'
     severity: WARNING
@@ -10,21 +10,24 @@ rules:
           languages: [cairo]
           patterns:
             - pattern: |
+                #[starknet::interface]
                 trait $CONTRACT_INTERFACE { 
                   ...
+                  fn $F(...);
+                  ...
                 }
-        - id: check-effect-interfaction
+        - id: check-effect-interaction
           languages: [cairo]
           patterns:
             - pattern-inside: |
                 #[contract]
                 mod $CONTRACT {
                   ...
-                }
-            - pattern: |
-                struct Storage {
-                  ...,
-                  $FIELD: $TYPE,
+                  struct Storage {
+                    ...,
+                    $FIELD: $TYPE,
+                    ...
+                  }
                   ...
                 }
             - pattern: |
@@ -36,7 +39,4 @@ rules:
                   ...
                 }
       on:
-        - 'contract-interface-declaration.$CONTRACT_INTERFACE == check-effect-interfaction.$CONTRACT_INTERFACE'
-        - 'contract-interface-declaration.$F == check-effect-interfaction.$F'
-
-          
+        - 'contract-interface-declaration.$F == check-effect-interaction.$F'

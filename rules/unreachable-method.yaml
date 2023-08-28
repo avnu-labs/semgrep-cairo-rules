@@ -10,7 +10,7 @@ rules:
           #[external]
           fn $F(...) { ... }
       - pattern-not-inside: |
-          #[contract]
+          #[starknet::contract]
           mod $CONTRACT {
             ...
             fn $G(...) {

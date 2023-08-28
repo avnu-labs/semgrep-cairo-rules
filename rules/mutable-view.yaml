@@ -32,11 +32,17 @@ rules:
               ...
             }
         - pattern-inside: |
+            #[starknet::contract]
             mod $CONTRACT {
               ...
               fn $G(...) { ... }
               ...
             }
-        - pattern-not: |
-            #[view]
-            fn $G(...) { ... }
+        - pattern-not-inside: |
+            #[starknet::contract]
+            mod $CONTRACT {
+              ...
+              #[view]
+              fn $G(...) { ... }
+              ...
+            }

@@ -1,5 +1,10 @@
-#[contract]
-mod UnusedEvents {
+#[starknet::interface]
+trait ISomeContract<TContractState> {}
+
+#[starknet::contract]
+mod SomeContract {
+    struct Storage {}
+    
     // ruleid: unused-event
     #[event]
     fn MyUnusedEvent(value: u256) {}

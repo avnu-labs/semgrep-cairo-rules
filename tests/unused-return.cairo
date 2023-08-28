@@ -1,55 +1,57 @@
-use option::OptionTrait;
+#[starknet::interface]
+trait ISomeContract<TContractState> {}
 
-#[contract]
-mod UnusedReturn {
-    struct Storage {
-        value: felt252,
+#[starknet::contract]
+mod SomeContract {
+    struct Storage {}
+
+    #[external]
+    fn valid_1(amount: felt252) {
+        let x = return_value(amount);
     }
 
     #[external]
-    fn unused_return_1(amount: felt252) {
-        f_1(amount);
+    fn valid_2(amount: felt252) {
+        no_return_value(amount);
     }
 
     #[external]
-    fn unused_return_2(amount: felt252) {
-        f_2(amount);
+    fn valid_3(amount: felt252) -> felt252 {
+        return_value(amount)
     }
 
     #[external]
-    fn unused_return_3(amount: felt252) {
-        f_3(amount);
+    fn valid_4(amount: felt252) -> felt252 {
+        if true {
+            return_value(amount)
+        }
     }
 
     #[external]
-    fn unused_return_4(amount: felt252) {
-        f_4(amount);
+    fn invalid_1(amount: felt252) {
+        return_value(amount)
     }
 
     #[external]
-    fn no_report() {
-        let a = value::read();
+    fn invalid_2(amount: felt252) {
+        if true {
+            return_value(amount);
+        }
     }
 
-    fn f_1(amount: felt252) -> felt252 {
-        value::write(amount);
-        23
+    #[external]
+    fn invalid_3(amount: felt252) {
+        loop {
+            no_return_value(amount);
+            break;
+        }
     }
 
-    fn f_2(amount: felt252) -> (felt252, felt252) {
-        (amount, amount)
-    }
-
-    fn f_3(amount: felt252) -> felt252 {
+    fn return_value(amount: felt252) -> felt252 {
         amount
     }
 
-    fn f_4(amount: felt252) -> Option::<felt252> {
-        Option::Some(amount)
-    }
-
-    fn f_5() -> felt252 {
-        let a = value::read();
-        a * 2
+    fn no_return_value(amount: felt252) {
+        // Do something
     }
 }

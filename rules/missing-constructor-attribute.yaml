@@ -1,0 +1,16 @@
+rules:
+  - id: missing-constructor-attribute
+    languages: [cairo]
+    message: "method constructor found without attribute #[constructor]."
+    severity: WARNING
+    patterns:
+      - pattern: |
+          fn constructor(...) {
+              ...
+          }
+      - pattern-not: |
+          #[constructor]
+          fn constructor(...) {
+              ...
+          }
+    
