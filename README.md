@@ -5,9 +5,12 @@
 
 At present, the majority of the rules located here serve primarily as samples to demonstrate the process of constructing rules for Cairo 1.0.
 
-This initiative is an inspiration of the awesome job that [Trail Of Bit did for Cairo 0 with Amarna](https://blog.trailofbits.com/2022/04/20/amarna-static-analysis-for-cairo-programs/)
-
 ## How to Use
+
+> **Info** 
+> Cairo is still evolving constantly which means that we need to adapt the parser to fit the new syntax. Consequently, we periodically release images with the latest version of Semgrep that you can access [here](https://hub.docker.com/layers/frostweeds/avnu-labs/semgrep-nightly/images/sha256-bae22beff4a6410a9e2bad717299cacffe1c0d63e22887f1f6999da633121647?context=explore). Once the changes are merged in the Semgrep official repository, we will remove these images.
+>
+> All the commands below can be run in the context of the image.
 
 We assume that you have Semgrep already installed, otherwise you can refer to the following [doc](https://github.com/returntocorp/semgrep).
 
